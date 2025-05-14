@@ -1,0 +1,46 @@
+import random
+
+class GuessNumber:
+    def __init__(self, bilance, min_sk=0, max_sk=100):
+        self.min_skaitlis = min_sk
+        self.max_skaitlis = max_sk
+        self.skaitlis = random.randint(min_sk, max_sk)
+        self.likme = 0
+        self.attempts = 0
+        self.bilance = bilance
+
+    def sakt_speli(self):
+        self.likme = float(input("Ievadi likmi (nauda): "))
+        
+        if self.likme > self.bilance:
+            print("Nav pietiekami daudz līdzekļu!")
+            return self.bilance 
+
+        print(f"Tava likme: {self.likme} naudas vienības")
+        self.bilance -= self.likme 
+
+        print(f"Uzmini skaitli no {self.min_skaitlis} līdz {self.max_skaitlis}!")
+
+        while self.attempts < 7:
+            try:
+                minejums = int(input(f"Tavs minējums ({self.attempts + 1}/7): "))
+            except ValueError:
+                print("Ievadi skaitli!")
+                continue
+
+            self.attempts += 1
+
+            if minejums < self.skaitlis:
+                print("Lielāks!")
+            elif minejums > self.skaitlis:
+                print("Mazāks!")
+            else:
+                multipliers = [100, 50, 20, 10, 5, 2, 1]
+                laime = self.likme * multipliers[self.attempts - 1]
+                print(f"Pareizi! Tu uzminēji pēc {self.attempts} mēģinājuma un laimēji {laime} naudas vienības!")
+                self.bilance += laime
+                return self.bilance
+
+        print(f"Tu neuzminēji skaitli! Pareizais skaitlis bija {self.skaitlis}.")
+        print(f"Tu zaudēji likmi: {self.likme}")
+        return self.bilance
