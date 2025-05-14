@@ -1,0 +1,34 @@
+from blackjack import Blackjack
+from guessnumber import GuessNumber
+
+def paradit_izvelni():
+    print("\n Casino Spēles:")
+    print("1. Blackjack")
+    print("2. Uzmini skaitli")
+
+def galvena_programma():
+    bilance = 1000
+
+    while True:
+        if bilance <= 0:
+            print("Jums vairs nav naudas, spēle beigusies.")
+            break
+
+        print(f"\nTava bilance: {bilance}$")
+        paradit_izvelni()
+
+        izvele = input("Izvēlies spēli (1 vai 2): ").strip()
+
+        if izvele == '1':
+            print("\n--- Blackjack ---")
+            spele = Blackjack(bilance)
+            bilance = spele.sakt_speli()
+        elif izvele == '2':
+            print("\n--- Uzmini Skaitli ---")
+            spele = GuessNumber(bilance)
+            bilance = spele.sakt_speli()
+        else:
+            print(" Nepareiza izvēle. Mēģini vēlreiz.")
+
+if __name__ == "__main__":
+    galvena_programma()
