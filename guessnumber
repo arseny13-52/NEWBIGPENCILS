@@ -1,23 +1,23 @@
 import random
 
 class GuessNumber:
-    def __init__(self, bilance, min_sk=0, max_sk=100):
-        self.min_skaitlis = min_sk
-        self.max_skaitlis = max_sk
-        self.skaitlis = random.randint(min_sk, max_sk)
+    def __init__(self, balance, min_skaitlis=0, max_skaitlis=100):
+        self.min_skaitlis = min_skaitlis
+        self.max_skaitlis = max_skaitlis
+        self.skaitlis = random.randint(min_skaitlis, max_skaitlis)
         self.likme = 0
         self.attempts = 0
-        self.bilance = bilance
+        self.balance = balance
 
     def sakt_speli(self):
-        self.likme = float(input("Ievadi likmi (nauda): "))
+        self.likme = float(input("Ievadi likmi: "))
         
-        if self.likme > self.bilance:
-            print("Nav pietiekami daudz līdzekļu!")
-            return self.bilance 
+        if self.likme > self.balance:
+            print("Nav pietiekami daudz naudus!")
+            return self.balance 
 
         print(f"Tava likme: {self.likme} naudas vienības")
-        self.bilance -= self.likme 
+        self.balance -= self.likme 
 
         print(f"Uzmini skaitli no {self.min_skaitlis} līdz {self.max_skaitlis}!")
 
@@ -39,8 +39,8 @@ class GuessNumber:
                 laime = self.likme * multipliers[self.attempts - 1]
                 print(f"Pareizi! Tu uzminēji pēc {self.attempts} mēģinājuma un laimēji {laime} naudas vienības!")
                 self.bilance += laime
-                return self.bilance
+                return self.balance
 
         print(f"Tu neuzminēji skaitli! Pareizais skaitlis bija {self.skaitlis}.")
         print(f"Tu zaudēji likmi: {self.likme}")
-        return self.bilance
+        return self.balance
