@@ -1,0 +1,66 @@
+import random
+
+class Blackjack:
+    def __init__(self, bilance):
+        self.dileris = 0
+        self.speletajs = 0
+        self.likme = 0
+        self.bilance = bilance
+
+    def sakt_speli(self):
+        self.likme = float(input("Ievadi likmi (nauda): "))
+        
+        if self.likme > self.bilance:
+            print("Nav pietiekami daudz līdzekļu!")
+            return self.bilance
+
+        print(f"Tava likme: {self.likme} naudas vienības")
+        self.bilance -= self.likme 
+
+        for _ in range(2):
+            self.speletajs += random.randint(1, 11)
+            self.dileris += random.randint(1, 11)
+
+        print(f"Tavi sākotnējie punkti: {self.speletajs}")
+
+        if self.dileris < 16:
+            self.dileris += random.randint(1, 11)
+
+        if self.dileris == 21:
+            print(f"Dilera punkti: {self.dileris}")
+            print("Dilers uzvarēja! Viņam ir 21.")
+            print(f"Tu zaudēji likmi: {self.likme}")
+            return self.bilance 
+
+        if self.dileris > 21:
+            print(f"Dilera punkti: {self.dileris}")
+            print("Dilers zaudēja!")
+
+        while True:
+            izvele = input("Paņemt vēl vienu kārti? [Y/N]: ").strip().lower()
+            if izvele == 'n':
+                break
+            self.speletajs += random.randint(1, 11)
+            print(f"Tavi punkti: {self.speletajs}")
+
+            if self.speletajs == 21:
+                print("Spēlētājs uzvarēja!")
+                self.bilance += self.likme * 2  
+                print(f"Tu laimēji {self.likme * 2} naudas vienības!")
+                return self.bilance
+
+            if self.speletajs > 21:
+                print("Spēlētājs zaudēja!")
+                print(f"Tu zaudēji likmi: {self.likme}")
+                return self.bilance
+
+        print(f"Dilera punkti: {self.dileris}")
+        if self.speletajs > self.dileris:
+            print("Spēlētājs uzvarēja!")
+            self.bilance += self.likme * 2 
+            print(f"Tu laimēji {self.likme * 2} naudas vienības!")
+        else:
+            print("Dilers uzvarēja!")
+            print(f"Tu zaudēji likmi: {self.likme}")
+
+        return self.bilance
