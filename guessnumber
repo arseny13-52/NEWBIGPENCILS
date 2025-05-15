@@ -38,7 +38,7 @@ class GuessNumber:
                 multipliers = [100, 50, 20, 10, 5, 2, 1]
                 laime = self.likme * multipliers[self.attempts - 1]
                 print(f"Pareizi! Tu uzminēji pēc {self.attempts} mēģinājuma un laimēji {laime} naudas vienības!")
-                self.bilance += laime
+                self.balance += laime
                 return self.balance
 
         print(f"Tu neuzminēji skaitli! Pareizais skaitlis bija {self.skaitlis}.")
